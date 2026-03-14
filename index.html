@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>寻山科技 — 探索数字未来</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #0d0d0f;
+      --ink-soft: #1a1a1f;
+      --ink-mid: #2a2a32;
+      --gold: #c9a84c;
+      --gold-light: #e8c97a;
+      --gold-dim: rgba(201,168,76,0.15);
+      --cream: #f5f0e8;
+      --cream-dim: rgba(245,240,232,0.06);
+      --text: #e8e4dc;
+      --text-muted: rgba(232,228,220,0.5);
+      --serif: 'Noto Serif SC', serif;
+      --sans: 'DM Sans', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--ink);
+      color: var(--text);
+      font-family: var(--sans);
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.5rem 4rem;
+      background: linear-gradient(to bottom, rgba(13,13,15,0.95), transparent);
+      backdrop-filter: blur(2px);
+    }
+    .logo {
+      font-family: var(--serif);
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.1em;
+      text-decoration: none;
+    }
+    .logo span { color: var(--text); font-weight: 400; }
+    nav ul { list-style: none; display: flex; gap: 2.5rem; }
+    nav ul a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+    nav ul a:hover { color: var(--gold); }
+
+    /* ── HERO ── */
+    #hero {
+      position: relative;
+      height: 100vh;
+      display: flex; align-items: center;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background-image: url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1800&q=80');
+      background-size: cover;
+      background-position: center 40%;
+      filter: brightness(0.25) saturate(0.6);
+      transform: scale(1.05);
+      animation: slowzoom 20s ease-in-out infinite alternate;
+    }
+    @keyframes slowzoom {
+      from { transform: scale(1.05); }
+      to   { transform: scale(1.12); }
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(13,13,15,0.7) 0%, transparent 60%, rgba(13,13,15,0.5) 100%);
+    }
+    .hero-content {
+      position: relative; z-index: 2;
+      padding: 0 4rem;
+      max-width: 900px;
+      animation: fadeup 1.2s ease both;
+    }
+    @keyframes fadeup {
+      from { opacity: 0; transform: translateY(40px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .hero-eyebrow {
+      font-size: 0.75rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+      animation: fadeup 1.2s 0.2s ease both;
+    }
+    .hero-title {
+      font-family: var(--serif);
+      font-size: clamp(3.5rem, 8vw, 7rem);
+      font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+      animation: fadeup 1.2s 0.35s ease both;
+    }
+    .hero-title em {
+      font-style: normal;
+      color: var(--gold);
+      display: block;
+    }
+    .hero-sub {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      max-width: 480px;
+      line-height: 1.8;
+      margin-bottom: 3rem;
+      animation: fadeup 1.2s 0.5s ease both;
+    }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      background: var(--gold);
+      color: var(--ink);
+      padding: 0.9rem 2.2rem;
+      font-family: var(--sans);
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: none; cursor: pointer;
+      transition: background 0.3s, transform 0.2s;
+      animation: fadeup 1.2s 0.65s ease both;
+    }
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+    .btn-primary svg { width: 16px; height: 16px; }
+
+    .hero-scroll {
+      position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+      color: var(--text-muted); font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
+      animation: bounce 2s infinite;
+    }
+    @keyframes bounce {
+      0%,100% { transform: translateX(-50%) translateY(0); }
+      50%      { transform: translateX(-50%) translateY(6px); }
+    }
+    .hero-scroll::after {
+      content: '';
+      display: block; width: 1px; height: 40px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+    }
+
+    /* ── SECTION BASE ── */
+    section { padding: 7rem 4rem; }
+    .section-label {
+      font-size: 0.7rem; letter-spacing: 0.35em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 1rem;
+    }
+    .section-title {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+    }
+
+    /* ── SERVICES ── */
+    #services { background: var(--ink-soft); }
+    .services-header { max-width: 600px; margin-bottom: 4rem; }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5px;
+    }
+    .service-card {
+      background: var(--ink-mid);
+      padding: 3rem 2.5rem;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.4s;
+      cursor: default;
+    }
+    .service-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--gold);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+    .service-card:hover { background: #22222c; }
+    .service-card:hover::before { transform: scaleX(1); }
+    .service-icon {
+      width: 52px; height: 52px;
+      background: var(--gold-dim);
+      border: 1px solid rgba(201,168,76,0.3);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 2rem;
+      transition: background 0.3s;
+    }
+    .service-card:hover .service-icon { background: rgba(201,168,76,0.25); }
+    .service-icon svg { width: 24px; height: 24px; stroke: var(--gold); fill: none; stroke-width: 1.5; }
+    .service-num {
+      position: absolute; top: 2rem; right: 2.5rem;
+      font-family: var(--serif);
+      font-size: 4rem; font-weight: 900;
+      color: rgba(201,168,76,0.06);
+      line-height: 1;
+      transition: color 0.3s;
+    }
+    .service-card:hover .service-num { color: rgba(201,168,76,0.1); }
+    .service-name {
+      font-family: var(--serif);
+      font-size: 1.4rem; font-weight: 700;
+      margin-bottom: 1rem;
+    }
+    .service-desc {
+      font-size: 0.9rem; line-height: 1.8;
+      color: var(--text-muted);
+    }
+    .service-tags {
+      display: flex; flex-wrap: wrap; gap: 0.5rem;
+      margin-top: 1.5rem;
+    }
+    .tag {
+      font-size: 0.7rem; letter-spacing: 0.08em;
+      padding: 0.3rem 0.8rem;
+      border: 1px solid rgba(201,168,76,0.25);
+      color: var(--gold);
+    }
+
+    /* ── ABOUT ── */
+    #about {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: center;
+    }
+    .about-img-wrap {
+      position: relative;
+      aspect-ratio: 4/5;
+      overflow: hidden;
+    }
+    .about-img-wrap img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      filter: brightness(0.7) saturate(0.7);
+      transition: transform 0.8s ease;
+    }
+    .about-img-wrap:hover img { transform: scale(1.04); }
+    .about-img-wrap::after {
+      content: '';
+      position: absolute; inset: 0;
+      border: 1px solid rgba(201,168,76,0.2);
+      pointer-events: none;
+    }
+    .about-frame {
+      position: absolute;
+      bottom: -1.5rem; right: -1.5rem;
+      width: 60%; height: 60%;
+      border: 1px solid rgba(201,168,76,0.15);
+      pointer-events: none;
+    }
+    .about-stat {
+      display: flex; gap: 3rem;
+      margin: 2.5rem 0;
+    }
+    .stat-item {}
+    .stat-num {
+      font-family: var(--serif);
+      font-size: 2.8rem; font-weight: 900;
+      color: var(--gold);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 0.8rem; color: var(--text-muted);
+      letter-spacing: 0.05em; margin-top: 0.3rem;
+    }
+    .about-text { font-size: 0.95rem; line-height: 2; color: var(--text-muted); }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--ink-soft); }
+    .contact-inner {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 6rem;
+      align-items: start;
+    }
+    .contact-info { padding-top: 1rem; }
+    .contact-detail {
+      display: flex; align-items: flex-start; gap: 1rem;
+      margin-bottom: 1.8rem;
+    }
+    .contact-detail svg { width: 18px; height: 18px; stroke: var(--gold); fill: none; stroke-width: 1.5; flex-shrink: 0; margin-top: 2px; }
+    .contact-detail-text { font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; }
+    .contact-detail-label { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.3rem; }
+
+    form { display: flex; flex-direction: column; gap: 1.2rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
+    label { font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted); }
+    input, textarea {
+      background: var(--ink-mid);
+      border: 1px solid rgba(232,228,220,0.1);
+      color: var(--text);
+      padding: 0.85rem 1rem;
+      font-family: var(--sans);
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.3s;
+      resize: none;
+    }
+    input:focus, textarea:focus { border-color: var(--gold); }
+    textarea { min-height: 120px; }
+    .btn-submit {
+      align-self: flex-start;
+      background: transparent;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      padding: 0.9rem 2.2rem;
+      font-family: var(--sans);
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.3s, color 0.3s;
+    }
+    .btn-submit:hover { background: var(--gold); color: var(--ink); }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 2.5rem 4rem;
+      border-top: 1px solid rgba(232,228,220,0.07);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    footer .logo { font-size: 1.1rem; }
+    .footer-copy { font-size: 0.78rem; color: var(--text-muted); }
+
+    /* ── DIVIDER ── */
+    .gold-line {
+      width: 48px; height: 1px;
+      background: var(--gold);
+      margin: 1.5rem 0 2rem;
+    }
+
+    /* ── SCROLL REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    /* Force visible for static render */
+    @media print { .reveal { opacity:1; transform:none; } }
+
+    @media (max-width: 900px) {
+      nav { padding: 1.2rem 2rem; }
+      nav ul { display: none; }
+      section { padding: 5rem 2rem; }
+      #hero .hero-content { padding: 0 2rem; }
+      .services-grid { grid-template-columns: 1fr; }
+      #about { grid-template-columns: 1fr; gap: 3rem; }
+      .contact-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .form-row { grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: 1rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo">寻山<span>科技</span></a>
+  <ul>
+    <li><a href="#services">服务</a></li>
+    <li><a href="#about">关于</a></li>
+    <li><a href="#contact">联系</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">寻山科技 · 探索数字未来</p>
+    <h1 class="hero-title">
+      登高望远<br/>
+      <em>数字无界</em>
+    </h1>
+    <p class="hero-sub">专注 APP 开发、小程序开发与 AI 解决方案，以技术为桨，助力企业乘风破浪。</p>
+    <a href="#services" class="btn-primary">
+      探索服务
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+  <div class="hero-scroll">Scroll</div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="services-header reveal">
+    <p class="section-label">我们的服务</p>
+    <h2 class="section-title">三大核心能力<br/>驱动业务增长</h2>
+    <div class="gold-line"></div>
+    <p style="color:var(--text-muted);font-size:0.95rem;line-height:1.8;">从移动端到智能化，我们提供端到端的数字化解决方案，让每一行代码都创造真实价值。</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <span class="service-num">01</span>
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18.01"/></svg>
+      </div>
+      <h3 class="service-name">APP 开发</h3>
+      <p class="service-desc">iOS & Android 原生与跨平台应用开发，从产品设计到上线运营，全程护航。注重用户体验与性能优化，打造令人难忘的移动产品。</p>
+      <div class="service-tags">
+        <span class="tag">iOS</span>
+        <span class="tag">Android</span>
+        <span class="tag">Flutter</span>
+        <span class="tag">React Native</span>
+      </div>
+    </div>
+    <div class="service-card reveal" style="transition-delay:0.15s">
+      <span class="service-num">02</span>
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+      </div>
+      <h3 class="service-name">小程序开发</h3>
+      <p class="service-desc">微信、支付宝、抖音等主流平台小程序定制开发，轻量快速，触达亿级用户。深度整合平台生态，实现业务快速落地。</p>
+      <div class="service-tags">
+        <span class="tag">微信小程序</span>
+        <span class="tag">支付宝</span>
+        <span class="tag">抖音</span>
+        <span class="tag">uni-app</span>
+      </div>
+    </div>
+    <div class="service-card reveal" style="transition-delay:0.3s">
+      <span class="service-num">03</span>
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+      </div>
+      <h3 class="service-name">AI 开发</h3>
+      <p class="service-desc">大模型应用集成、智能客服、数据分析、自动化流程——将 AI 能力嵌入您的业务系统，让企业真正用上人工智能。</p>
+      <div class="service-tags">
+        <span class="tag">大模型集成</span>
+        <span class="tag">智能客服</span>
+        <span class="tag">数据分析</span>
+        <span class="tag">自动化</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-img-wrap reveal">
+    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=900&q=80" alt="团队协作" />
+    <div class="about-frame"></div>
+  </div>
+  <div class="reveal" style="transition-delay:0.2s">
+    <p class="section-label">关于我们</p>
+    <h2 class="section-title">以技术为本<br/>以价值为归</h2>
+    <div class="gold-line"></div>
+    <p class="about-text">寻山科技是一家专注于移动互联网与人工智能领域的技术服务公司。我们相信，好的技术应该像山一样稳固，像路一样通达。</p>
+    <p class="about-text" style="margin-top:1rem;">团队由资深工程师、产品设计师与 AI 研究员组成，服务覆盖初创企业到大型集团，累计交付超过百个数字化项目。</p>
+    <div class="about-stat">
+      <div class="stat-item">
+        <div class="stat-num">100+</div>
+        <div class="stat-label">交付项目</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">50+</div>
+        <div class="stat-label">服务客户</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">5年+</div>
+        <div class="stat-label">行业经验</div>
+      </div>
+    </div>
+    <a href="#contact" class="btn-primary">联系我们</a>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="contact-info reveal">
+      <p class="section-label">联系我们</p>
+      <h2 class="section-title">开启合作<br/>共创未来</h2>
+      <div class="gold-line"></div>
+      <div class="contact-detail">
+        <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <div class="contact-detail-text">
+          <div class="contact-detail-label">地址</div>
+          中国 · 某省某市科技园区
+        </div>
+      </div>
+      <div class="contact-detail">
+        <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.68A2 2 0 012 .18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        <div class="contact-detail-text">
+          <div class="contact-detail-label">电话</div>
+          400-XXX-XXXX
+        </div>
+      </div>
+      <div class="contact-detail">
+        <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        <div class="contact-detail-text">
+          <div class="contact-detail-label">邮箱</div>
+          hello@xunshan.tech
+        </div>
+      </div>
+    </div>
+    <form class="reveal" style="transition-delay:0.2s" onsubmit="return false;">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="name">您的姓名</label>
+          <input type="text" id="name" placeholder="张三" />
+        </div>
+        <div class="form-group">
+          <label for="phone">联系电话</label>
+          <input type="tel" id="phone" placeholder="138 0000 0000" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="company">公司名称</label>
+        <input type="text" id="company" placeholder="您的公司" />
+      </div>
+      <div class="form-group">
+        <label for="msg">项目需求</label>
+        <textarea id="msg" placeholder="请简要描述您的项目需求..."></textarea>
+      </div>
+      <button type="submit" class="btn-submit">发送消息</button>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <a href="#" class="logo">寻山<span>科技</span></a>
+  <p class="footer-copy">© 2026 寻山科技 · 探索数字未来</p>
+</footer>
+
+<script>
+  // Scroll reveal — trigger immediately for elements already in view
+  const reveals = document.querySelectorAll('.reveal');
+  // Mark all visible immediately on load
+  reveals.forEach(el => el.classList.add('visible'));
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.05 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
